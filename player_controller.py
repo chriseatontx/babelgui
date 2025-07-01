@@ -48,7 +48,7 @@ class PlayerController:
         """Release all currently pressed movement keys"""
         for key in self.current_keys_pressed.copy():
             pyautogui.keyUp(key)
-            self.current_keys_pressed.remove(key)
+        self.current_keys_pressed.clear()
     
     def _move_in_circle(self):
         """Move the player in a circular pattern"""

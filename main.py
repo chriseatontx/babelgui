@@ -3,41 +3,74 @@
 import pyautogui
 import keyboard
 import time
+import threading
+import sys
 
 from screen_analyzer import ScreenAnalyzer
 from player_controller import PlayerController
 from decision_maker import DecisionMaker
+from utils import log_action
 
-# Initialize components
-screen_analyzer = ScreenAnalyzer()
-player_controller = PlayerController()
-decision_maker = DecisionMaker()
+class GameBot:
+    def __init__(self):
+        self.running = True
+        self.screen_analyzer = ScreenAnalyzer()
+        self.player_controller = PlayerController()
+        self.decision_maker = DecisionMaker()
+        
+        # Set up kill switch
+        keyboard.add_hotkey('q', self.stop_bot)
+        
+    def stop_bot(self):
+        """Stop the bot gracefully"""
+        log_action("STOP", "Kill switch activated")
+        self.running = False
+        self.player_controller.emergency_stop()
+        
+    def run(self):
+        """Main game loop"""
+        log_action("START", "Game bot starting...")
+        print("Bot is running. Press 'q' to stop.")
+        
+        try:
+            while self.running:
+                try:
+                    # Capture the game screen
+                    game_screen = self.screen_analyzer.capture_game_screen()
+                    
+                    if game_screen is None:
+                        log_action("ERROR", "Failed to capture screen")
+                        time.sleep(1)
+                        continue
+                    
+                    # Analyze the current game state
+                    player, enemies = self.screen_analyzer.analyze_screen(game_screen)
+                    
+                    # Make decisions
+                    move_direction = self.decision_maker.decide_movement(player, enemies)
+                    
+                    # Control the player character
+                    self.player_controller.move_player(move_direction)
+                    
+                    # Small delay to prevent excessive CPU usage
+                    time.sleep(0.1)
+                    
+                except Exception as e:
+                    log_action("ERROR", f"Error in main loop: {str(e)}")
+                    time.sleep(0.5)
+                    
+        except KeyboardInterrupt:
+            log_action("INTERRUPT", "Keyboard interrupt received")
+        finally:
+            self.cleanup()
+            
+    def cleanup(self):
+        """Clean up resources before exit"""
+        log_action("CLEANUP", "Cleaning up...")
+        self.player_controller.emergency_stop()
+        keyboard.unhook_all()
+        print("Bot stopped successfully.")
 
-# Define a kill switch
-def kill_switch():
-    print("Kill switch activated. Exiting the game bot.")
-    exit(0)
-
-keyboard.add_hotkey('q', kill_switch)
-
-# Main game loop
 if __name__ == "__main__":
-    print("Starting the game bot. Press 'q' to stop.")
-    try:
-        while True:
-            # Capture the game screen
-            game_screen = screen_analyzer.capture_game_screen()
-
-            # Analyze the current game state
-            player, enemies = screen_analyzer.analyze_screen(game_screen)
-
-            # Make decisions
-            move_direction = decision_maker.decide_movement(player, enemies)
-
-            # Control the player character
-            player_controller.move_player(move_direction)
-
-            time.sleep(0.1)  # Control the loop speed
-
-    except KeyboardInterrupt:
-        kill_switch()
+    bot = GameBot()
+    bot.run()
