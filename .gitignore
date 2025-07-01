@@ -85,3 +85,9 @@ game_templates/
 # Calibration files
 calibration_preview.png
 test_capture.png
+
+# Level-up template files
+level_up_template.png
+full_level_up_screen.png
+template_match_result.png
+upgrade_db.json

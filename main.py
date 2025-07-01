@@ -10,6 +10,8 @@ from screen_analyzer import ScreenAnalyzer
 from player_controller_keyboard import PlayerControllerKeyboard
 from decision_maker_enhanced import DecisionMakerEnhanced
 from utils import log_action
+from upgrade_manager import UpgradeManager
+from combat_tracker import CombatTracker
 
 class GameBot:
     def __init__(self):
@@ -18,6 +20,8 @@ class GameBot:
         self.player_controller = PlayerControllerKeyboard()  # Using keyboard library
         self.decision_maker = DecisionMakerEnhanced()  # Using enhanced AI
         self.loop_count = 0
+        self.upgrade_manager = UpgradeManager()
+        self.combat_tracker = CombatTracker()
         
         # Set up kill switch
         keyboard.add_hotkey('q', self.stop_bot)
@@ -77,6 +81,27 @@ class GameBot:
                     # Analyze the current game state
                     player, enemies = self.screen_analyzer.analyze_screen(game_screen)
                     experience_shards = self.screen_analyzer.detect_experience_shards(game_screen)
+                    
+                    # Check for level-up screen
+                    if self.screen_analyzer.detect_level_up_screen(game_screen):
+                        upgrade_options = self.screen_analyzer.detect_upgrade_options(game_screen)
+                        best_upgrade, upgrade_index = self.upgrade_manager.evaluate_best_upgrade(upgrade_options)
+                        
+                        print(f"🆙 Selecting upgrade: {best_upgrade} (option {upgrade_index + 1})")
+                        
+                        # Actually select the upgrade using keyboard controls
+                        self.player_controller.select_upgrade(upgrade_index, len(upgrade_options))
+                        
+                        # Calculate effectiveness and update database
+                        effectiveness = self.combat_tracker.on_level_up()
+                        self.upgrade_manager.update_upgrade_choice(best_upgrade, effectiveness)
+                        
+                        # Show current upgrade statistics
+                        print(self.upgrade_manager.get_upgrade_stats())
+                        
+                        # Wait a bit for level-up screen to disappear
+                        time.sleep(2)
+                        continue  # Skip the rest of the loop while level-up screen is handled
                     
                     # Make smart decisions
                     move_direction = self.decision_maker.decide_movement(player, enemies, experience_shards)
