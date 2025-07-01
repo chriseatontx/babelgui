@@ -22,21 +22,26 @@ def capture_and_show_region(left, top, width, height):
         screenshot = pyautogui.screenshot(region=(left, top, width, height))
         screenshot_np = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
         
-        # Resize for display if too large
-        display_width = min(800, width)
-        display_height = min(600, height)
+        # Save the screenshot for user to view
+        screenshot.save('calibration_preview.png')
+        print(f"\nCaptured region: left={left}, top={top}, width={width}, height={height}")
+        print("📸 Screenshot saved as 'calibration_preview.png'")
+        print("\n📋 Please check the saved image file to verify it shows your game area.")
+        print("   - Open 'calibration_preview.png' in your file explorer")
+        print("   - Verify it captures the game area correctly")
         
-        if width > display_width or height > display_height:
-            screenshot_np = cv2.resize(screenshot_np, (display_width, display_height))
-        
-        cv2.imshow('Game Region Preview', screenshot_np)
-        print(f"Showing region: left={left}, top={top}, width={width}, height={height}")
-        print("Press any key in the preview window to continue, or 'q' to quit...")
-        
-        key = cv2.waitKey(0) & 0xFF
-        cv2.destroyAllWindows()
-        
-        return key != ord('q')
+        # Simple text-based confirmation instead of OpenCV window
+        while True:
+            response = input("\nDoes the preview image look correct? (y/n/q to quit): ").lower().strip()
+            if response == 'y':
+                return True
+            elif response == 'n':
+                return False
+            elif response == 'q':
+                print("Calibration cancelled.")
+                return False
+            else:
+                print("Please enter 'y' for yes, 'n' for no, or 'q' to quit.")
         
     except Exception as e:
         print(f"Error capturing region: {e}")

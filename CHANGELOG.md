@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-07-01
+
+### Added - Smart Bot Enhancement
+- **2025-07-01 05:51:11** - Integrated smart bot functionality into main.py
+- **2025-07-01 05:49:38** - Created enhanced decision maker with intelligent pathfinding
+- **2025-07-01 05:47:38** - Added safe experience shard collection with threat assessment
+- **2025-07-01 05:44:13** - Successfully implemented keyboard library for input (BREAKTHROUGH!)
+- **2025-07-01 05:42:00** - Resolved input method issues using alternative input testing
+- **2025-07-01 05:36:53** - Added comprehensive input troubleshooting and alternative methods
+- **2025-07-01 05:34:28** - Fixed focus issue with automatic countdown system
+
+### Enhanced AI Features
+- **🧠 Intelligent Decision Making**: Multi-priority system (Danger → Collection → Survival)
+- **🛡️ Safety-First Pathfinding**: Only collects experience shards when route is safe
+- **🚨 Immediate Danger Detection**: Emergency escape when enemies get too close
+- **📊 Dynamic Threat Assessment**: Weighs danger by distance and enemy positions
+- **🔄 Stuck Detection & Recovery**: Automatically recovers from blocked movement
+- **⚖️ Risk vs Reward Analysis**: Evaluates whether collection is worth the risk
+
+### Technical Improvements
+- **Input Method Resolution**: Switched from pyautogui to keyboard library for reliable input
+- **Focus Management**: Added automatic countdown to allow proper game window focusing
+- **Path Safety Validation**: Multi-point path checking before moving toward targets
+- **Enhanced Logging**: Detailed debug information every 30 loops
+- **Performance Optimization**: Improved loop efficiency and error handling
+
+### New Components
+- **`decision_maker_enhanced.py`**: Advanced AI logic with smart pathfinding
+- **`player_controller_keyboard.py`**: Input controller using keyboard library
+- **`test_alternative_input.py`**: Comprehensive input method testing
+- **`test_keyboard_fixed.py`**: Fixed keyboard testing with automatic countdown
+- **`TROUBLESHOOTING.md`**: Complete troubleshooting guide for input issues
+
+### Fixed
+- **2025-07-01 05:44:13** - ✅ **MAJOR**: Resolved keyboard input not reaching game
+- **2025-07-01 05:34:28** - Fixed game focus issue preventing input reception
+- **2025-07-01 05:30:15** - Enhanced character movement logic for dynamic pathfinding
+- **2025-07-01 05:25:44** - Improved debug output for better troubleshooting
+
+### User Experience Improvements
+- **No Manual Input Required**: Automatic startup with countdown
+- **Clear Visual Feedback**: Enhanced console output with emojis and status
+- **Smart Behavior**: Character now moves intelligently toward goals
+- **Safety Prioritization**: Bot prioritizes survival over risky collection
+- **Comprehensive Diagnostics**: Multiple test scripts for troubleshooting
+
 ## [1.0.0] - 2025-07-01
 
 ### Added

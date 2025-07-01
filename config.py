@@ -4,10 +4,10 @@ import numpy as np
 
 # Screen capture settings
 GAME_REGION = {
-    'left': 100,
-    'top': 100,
-    'width': 1280,
-    'height': 720
+    'left': 969,
+    'top': 50,
+    'width': 1574,
+    'height': 877
 }
 
 # Player detection settings

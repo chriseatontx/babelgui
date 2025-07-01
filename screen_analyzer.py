@@ -45,3 +45,21 @@ class ScreenAnalyzer:
                     x, y, w, h = cv2.boundingRect(contour)
                     enemies.append((x, y, w, h))
         return enemies
+    
+    def detect_experience_shards(self, image):
+        """Detect green experience shards on screen"""
+        # Convert image to HSV
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        
+        # Create mask for green experience shards
+        xp_mask = cv2.inRange(hsv, XP_GEM_COLOR_RANGE['lower'], XP_GEM_COLOR_RANGE['upper'])
+        contours, _ = cv2.findContours(xp_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        
+        experience_shards = []
+        for contour in contours:
+            # Use smaller area threshold for experience shards
+            if cv2.contourArea(contour) > MIN_CONTOUR_AREA // 4:
+                x, y, w, h = cv2.boundingRect(contour)
+                experience_shards.append((x, y, w, h))
+        
+        return experience_shards

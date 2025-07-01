@@ -81,3 +81,7 @@ game_templates/
 *.png
 *.jpg
 *.jpeg
+
+# Calibration files
+calibration_preview.png
+test_capture.png

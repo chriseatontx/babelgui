@@ -1,4 +1,4 @@
-# main.py - Tower of Babel: Survivors of Chaos Smart Bot
+# main_smart.py - Smart bot with enhanced pathfinding and safety logic
 
 import pyautogui
 import keyboard
@@ -11,12 +11,12 @@ from player_controller_keyboard import PlayerControllerKeyboard
 from decision_maker_enhanced import DecisionMakerEnhanced
 from utils import log_action
 
-class GameBot:
+class SmartGameBot:
     def __init__(self):
         self.running = True
         self.screen_analyzer = ScreenAnalyzer()
-        self.player_controller = PlayerControllerKeyboard()  # Using keyboard library
-        self.decision_maker = DecisionMakerEnhanced()  # Using enhanced AI
+        self.player_controller = PlayerControllerKeyboard()
+        self.decision_maker = DecisionMakerEnhanced()  # Using enhanced version
         self.loop_count = 0
         
         # Set up kill switch
@@ -134,5 +134,5 @@ if __name__ == "__main__":
     print("6. Watch the console for intelligent decision making!")
     print("=" * 60)
     
-    bot = GameBot()
+    bot = SmartGameBot()
     bot.run()

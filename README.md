@@ -1,14 +1,17 @@
-# Tower of Babel: Survivors of Chaos Bot
+# Tower of Babel: Survivors of Chaos Smart Bot
 
-An automated Python application that plays Tower of Babel: Survivors of Chaos using computer vision and automated controls.
+An intelligent Python application that plays Tower of Babel: Survivors of Chaos using advanced computer vision, smart pathfinding, and automated controls.
 
-## Features
+## 🎯 Smart Features
 
-- **Automated Survival**: Keeps the character moving to avoid enemies
-- **Enemy Detection**: Uses OpenCV for identifying enemies on screen
-- **Upgrade Selection**: Automatically selects upgrades during level-up
-- **Loot Collection**: Identifies and collects experience gems and items
-- **Kill Switch**: Emergency stop using keyboard hotkey
+- **🧠 Intelligent Pathfinding**: Smart navigation to experience shards with safety checks
+- **🛡️ Dynamic Enemy Avoidance**: Real-time threat assessment and escape routes
+- **💎 Safe Experience Collection**: Only collects items when the path is safe
+- **🚨 Immediate Danger Response**: Emergency escape when enemies get too close
+- **🔄 Stuck Detection & Recovery**: Automatically recovers when movement is blocked
+- **⚖️ Threat Prioritization**: Weighs risks vs rewards for optimal decision making
+- **🎮 Adaptive Movement**: Changes strategies based on game state
+- **🛑 Emergency Stop**: Press 'q' anytime to stop safely
 
 ## Requirements
 
