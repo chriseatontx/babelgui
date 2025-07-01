@@ -34,14 +34,28 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Calibration
 1. Start Tower of Babel: Survivors of Chaos
-2. Position the game window appropriately
-3. Run the bot:
+2. Position the game window where it is fully visible
+3. Run the calibration tool to set up the screen region:
+```bash
+python calibrate.py
+```
+4. Follow the on-screen instructions to define the game area.
+
+### Running the Bot
+1. With the game running and visible, execute:
 ```bash
 python main.py
 ```
+2. Press 'q' to stop the bot safely at any time.
 
-4. Press 'q' to stop the bot at any time
+### Testing
+To verify the bot is working correctly:
+```bash
+python test_bot.py
+```
+This will test screen capture, movement controls, and basic bot functionality.
 
 ## Configuration
 
