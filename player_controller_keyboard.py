@@ -95,80 +95,32 @@ class PlayerControllerKeyboard:
         pyautogui.click(x, y)
         time.sleep(0.5)  # Wait for click to register
     
-    def select_upgrade(self, upgrade_index, total_options=3):
-        """Select an upgrade option using A/D keys and Enter"""
+    def select_upgrade(self):
+        """Select the leftmost upgrade option."""
         try:
-            # Ensure upgrade_index is within valid range (0-2 for 3 main options)
-            if upgrade_index < 0 or upgrade_index > 2:
-                print(f"⚠️ Invalid upgrade index {upgrade_index}. Using option 1 instead.")
-                upgrade_index = 0
+            print("🎯 Selecting leftmost upgrade option")
             
-            print(f"🎯 Selecting upgrade option {upgrade_index + 1} of 3 main options")
-            
-            # CRITICAL: Release all movement keys first to avoid conflicts
-            print("  🛑 Releasing all movement keys...")
+            # Release all movement keys to avoid conflicts
             self._release_all_keys()
-            time.sleep(0.5)  # Give time for keys to be released
+            time.sleep(0.5)
             
-            # ALWAYS move to leftmost position first (press A 4 times to be safe)
-            print("  ⬅️ Moving to leftmost position...")
-            for i in range(4):
-                print(f"    Pressing A (attempt {i+1}/4)")
+            # Move to the leftmost position by pressing 'a' multiple times
+            for _ in range(3):
                 kb.press_and_release('a')
-                time.sleep(0.3)  # Longer delay between presses
-            
-            # Now we're guaranteed to be at option 1 (leftmost)
-            print("  ⏸️ Waiting for UI to settle...")
-            time.sleep(0.5)  # Longer pause to let UI settle
-            
-            # Navigate to desired option (0=stay, 1=press D once, 2=press D twice)
-            if upgrade_index == 0:
-                print("  🎯 Staying at option 1 (leftmost)")
-                # Already at option 1, no movement needed
-            elif upgrade_index == 1:
-                print("  ➡️ Moving to option 2 (middle)")
-                print("    Pressing D once")
-                kb.press_and_release('d')
-                time.sleep(0.3)
-            elif upgrade_index == 2:
-                print("  ➡️➡️ Moving to option 3 (rightmost)")
-                print("    Pressing D first time")
-                kb.press_and_release('d')
-                time.sleep(0.3)
-                print("    Pressing D second time")
-                kb.press_and_release('d')
                 time.sleep(0.3)
             
-            # Select the option
-            print("  ⏸️ Final pause before selection...")
-            time.sleep(0.5)  # Longer pause before selection
-            print(f"  ✅ Confirming selection with Enter...")
+            # Wait for UI to settle
+            time.sleep(0.5)
+            
+            # Confirm selection with Enter
             kb.press_and_release('enter')
-            print(f"✅ Selected upgrade option {upgrade_index + 1}")
+            print("✅ Selected leftmost upgrade option.")
             
-            # Wait for selection to process
-            time.sleep(2.0)  # Longer wait for selection to process
+            # Wait for the selection to process
+            time.sleep(2.0)
             
         except Exception as e:
             print(f"❌ Error selecting upgrade: {e}")
-            import traceback
-            traceback.print_exc()
-            
-            # Fallback: move left and select first option
-            print("  🔄 Fallback: selecting first option")
-            try:
-                self._release_all_keys()
-                time.sleep(0.5)
-                for i in range(4):
-                    print(f"    Fallback A press {i+1}/4")
-                    kb.press_and_release('a')
-                    time.sleep(0.3)
-                time.sleep(0.5)
-                print("    Fallback Enter press")
-                kb.press_and_release('enter')
-                time.sleep(2.0)
-            except Exception as fallback_error:
-                print(f"❌ Fallback also failed: {fallback_error}")
     
     def emergency_stop(self):
         """Emergency stop - release all keys immediately"""

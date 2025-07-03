@@ -112,7 +112,7 @@ class DecisionMakerEnhanced:
             
             # Check if shard is within collection distance
             shard_distance = self._calculate_distance(player_pos, shard_center)
-            if shard_distance > COLLECTION_DISTANCE * 2:  # Too far
+            if shard_distance > COLLECTION_DISTANCE * 4:  # Too far
                 continue
             
             # Check if path to shard is safe
@@ -156,11 +156,7 @@ class DecisionMakerEnhanced:
         dx = target_pos[0] - player_pos[0]
         dy = target_pos[1] - player_pos[1]
         
-        # Determine primary direction based on larger distance
-        if abs(dx) > abs(dy):
-            return 'right' if dx > 0 else 'left'
-        else:
-            return 'down' if dy > 0 else 'up'
+        return (dx, dy)
     
     def _calculate_survival_movement(self, player_pos, enemies):
         """Calculate movement for general survival when no specific target"""

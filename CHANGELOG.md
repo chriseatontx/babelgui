@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Simplified upgrade logic to always select the leftmost option.
+- Removed `upgrade_manager.py`, `combat_tracker.py`, and `decision_maker.py`.
+- Modified `player_controller_keyboard.py` to press 'a' three times and then 'enter' for upgrade selection.
+- Improved enemy detection in `screen_analyzer.py` by adding non-maximum suppression to prevent duplicate counting.
+- Increased the experience shard collection radius in `decision_maker_enhanced.py` for more efficient collection.
+- Modified `decision_maker_enhanced.py` to allow for diagonal movement, making the bot more efficient.
+
+
 ## [1.1.0] - 2025-07-01
 
 ### Added - Smart Bot Enhancement
