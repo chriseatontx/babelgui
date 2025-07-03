@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Finalized upgrade selection logic to simply press 'enter' to select the default highlighted option.
+
+### Changed
 - Simplified upgrade logic to always select the leftmost option.
 - Removed `upgrade_manager.py`, `combat_tracker.py`, and `decision_maker.py`.
 - Modified `player_controller_keyboard.py` to press 'a' three times and then 'enter' for upgrade selection.

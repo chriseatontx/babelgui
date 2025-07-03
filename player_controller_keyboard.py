@@ -96,25 +96,18 @@ class PlayerControllerKeyboard:
         time.sleep(0.5)  # Wait for click to register
     
     def select_upgrade(self):
-        """Select the leftmost upgrade option."""
+        """Select the default upgrade option by pressing Enter."""
         try:
-            print("🎯 Selecting leftmost upgrade option")
+            print("🎯 Selecting default upgrade option...")
             
             # Release all movement keys to avoid conflicts
             self._release_all_keys()
             time.sleep(0.5)
             
-            # Move to the leftmost position by pressing 'a' multiple times
-            for _ in range(3):
-                kb.press_and_release('a')
-                time.sleep(0.3)
-            
-            # Wait for UI to settle
-            time.sleep(0.5)
-            
             # Confirm selection with Enter
+            print("  ✅ Confirming selection...")
             kb.press_and_release('enter')
-            print("✅ Selected leftmost upgrade option.")
+            print("✅ Upgrade selected.")
             
             # Wait for the selection to process
             time.sleep(2.0)
